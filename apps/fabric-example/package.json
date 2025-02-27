@@ -1,0 +1,25 @@
+{
+  "name": "fabric-example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "cd ios && bundle install && bundle exec pod update",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "format": "prettier --write --list-different ."
+  },
+  "dependencies": {
+    "common-app": "workspace:*",
+    "react-native": "0.77.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "installConfig": {
+    "selfReferences": false
+  }
+}
