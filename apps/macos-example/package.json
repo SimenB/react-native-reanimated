@@ -1,0 +1,35 @@
+{
+  "name": "macos-example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "macos": "react-native run-macos",
+    "build": "cd macos && bundle install && bundle exec pod update",
+    "format": "prettier --write --list-different .",
+    "start": "react-native start"
+  },
+  "dependencies": {
+    "common-app": "workspace:*",
+    "react": "18.3.1",
+    "react-native": "0.75.4",
+    "react-native-macos": "^0.75.13",
+    "react-native-reanimated": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@react-native/babel-preset": "0.75.4",
+    "@react-native/eslint-config": "0.75.4",
+    "@react-native/metro-config": "0.75.4",
+    "@react-native/typescript-config": "0.75.4",
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces",
+    "selfReferences": false
+  }
+}
