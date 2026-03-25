@@ -1,5 +1,4 @@
 'use strict';
-'worklet';
 import type { DropShadowValue, FilterFunction } from 'react-native';
 
 import type {
@@ -25,6 +24,7 @@ type SingleFilterValue = {
 };
 
 const parseHueRotate = (value: SingleFilterValue): number | null => {
+  'worklet';
   const { numberValue, unit } = value;
   if (numberValue !== 0 && unit !== 'deg' && unit !== 'rad') {
     return null;
@@ -33,6 +33,7 @@ const parseHueRotate = (value: SingleFilterValue): number | null => {
 };
 
 const parseBlur = (value: SingleFilterValue): number | null => {
+  'worklet';
   const { numberValue, unit } = value;
   if ((unit && unit !== 'px') || numberValue < 0) {
     return null;
@@ -41,6 +42,7 @@ const parseBlur = (value: SingleFilterValue): number | null => {
 };
 
 const parsePercentageFilter = (value: SingleFilterValue): number | null => {
+  'worklet';
   const { numberValue, unit } = value;
   if ((unit && unit !== '%') || numberValue < 0) {
     return null;
@@ -51,6 +53,7 @@ const parsePercentageFilter = (value: SingleFilterValue): number | null => {
 const LENGTH_MAPPINGS = ['offsetX', 'offsetY', 'standardDeviation'] as const;
 
 const parseDropShadowString = (value: string): DropShadowValue | null => {
+  'worklet';
   const match = value.match(DROP_SHADOW_REGEX) ?? [];
   const result: DropShadowValue = { offsetX: 0, offsetY: 0 };
   let foundLengthsCount = 0;
@@ -73,6 +76,7 @@ const parseDropShadow = (
   value: string | DropShadowValue,
   context: ValueProcessorContext | undefined
 ): ParsedDropShadow | null => {
+  'worklet';
   const dropShadow =
     typeof value === 'string' ? parseDropShadowString(value) : value;
   if (dropShadow === null) {
@@ -109,6 +113,7 @@ const parseFilterProperty = (
   filterValue: string | number | DropShadowValue,
   context: ValueProcessorContext | undefined
 ): ParsedFilterFunction | null => {
+  'worklet';
   // We need to handle dropShadow separately because of its complex structure
   if (filterName === 'dropShadow') {
     const dropShadow = parseDropShadow(
@@ -174,6 +179,7 @@ const parseFilterString = (
   value: string,
   context: ValueProcessorContext | undefined
 ): FilterArray => {
+  'worklet';
   const matches = Array.from(value.matchAll(FILTER_REGEX));
 
   const filterArray: FilterArray = [];
@@ -196,6 +202,7 @@ export const processFilter: ValueProcessor<
   ReadonlyArray<FilterFunction> | string,
   FilterArray
 > = (value, context) => {
+  'worklet';
   if (typeof value === 'string') {
     return parseFilterString(value, context);
   }
