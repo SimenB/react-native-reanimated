@@ -90,6 +90,14 @@ class WorkletsModule(reactContext: ReactApplicationContext) :
         return true
     }
 
+    @OptIn(FrameworkAPI::class)
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    override fun start(): Boolean {
+        reactApplicationContext.assertOnJSQueueThread()
+        startCpp()
+        return true
+    }
+
     fun abortRequest(runtimeId: Int, requestIdAsDouble: Double) {
         mWorkletsNetworking.jsiAbortRequest(runtimeId, requestIdAsDouble)
     }
@@ -151,6 +159,8 @@ class WorkletsModule(reactContext: ReactApplicationContext) :
     }
 
     private external fun invalidateCpp()
+
+    private external fun startCpp()
 
     override fun onHostResume() {
         mAnimationFrameQueue.resume()
